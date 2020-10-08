@@ -39,8 +39,6 @@ function InvForm({onSubmit}) {
             timeLength,
         } = values
 
-        console.log('--- values', values)
-
         const resultsList = []
         const conpoundFreqInt = parseInt(compoundFreq)
         const timeLengthInt = parseInt(timeLength)
