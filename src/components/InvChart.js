@@ -1,19 +1,23 @@
 import React, {useCallback} from 'react'
-import PropTypes from 'prop-types'
-import {BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts'
-import Paper from '@material-ui/core/Paper'
+import {BarChart, Bar, XAxis, YAxis, Tooltip} from 'recharts'
 import {Box, Typography} from '@material-ui/core'
 
 function InvChart({data}) {
-    const tooltipFormatter = useCallback((value, name, props) => ([`${Math.round(value*100)/100}`, `Sum: `] ), [])
-    const tooltipLabelFormatter = useCallback((value) => (`Period ${value}`), [])
+    const tooltipFormatter = useCallback((value, name, props) => {
+        const roundedSum = Math.round(value*100)/100
+        const roundedIncome = Math.round(props.payload.income*100)/100
+
+        return ([`${roundedSum} (income: ${roundedIncome})`, `Sum`] )
+    }, [])
+    const tooltipLabelFormatter = useCallback((value, name, props) => (`Period ${value}`), [])
 
     if (!data)
         return null
 
     const mappedData = data.periods.map((p, i) => ({
         name: i + 1,
-        val: p,
+        val: p.sum,
+        income: p.incomeNet,
     }))
 
     const {
@@ -33,7 +37,9 @@ function InvChart({data}) {
                       data={mappedData} >
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip labelFormatter={tooltipLabelFormatter} formatter={tooltipFormatter} />
+                <Tooltip labelFormatter={tooltipLabelFormatter}
+                         formatter={tooltipFormatter}
+                />
                 <Bar dataKey="val" fill="#8884d8" />
             </BarChart>
             <Typography variant="h5" style={{marginBottom: '30px'}}>

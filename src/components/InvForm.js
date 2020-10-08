@@ -65,7 +65,10 @@ function InvForm({onSubmit}) {
             sum+=periodContribution
             investmentsTotal+=periodContribution
 
-            resultsList.push(sum)
+            resultsList.push({
+                sum,
+                incomeNet,
+            })
         }
 
         const result = {
