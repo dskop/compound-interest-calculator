@@ -39,6 +39,8 @@ function InvForm({onSubmit}) {
             timeLength,
         } = values
 
+        console.log('--- values', values)
+
         const resultsList = []
         const conpoundFreqInt = parseInt(compoundFreq)
         const timeLengthInt = parseInt(timeLength)
@@ -47,15 +49,13 @@ function InvForm({onSubmit}) {
         const periodRate = (parseFloat(interestRate) / 100) / conpoundFreqInt
         const periodTaxRate = parseFloat(tax) / 100
         const periodContribution = parseFloat(monthlyContribution) / (conpoundFreqInt / 12)
+
         let sum = initialInvestmentFl
         let investmentsTotal = initialInvestmentFl
         let incomeNetTotal = 0
         let taxTotal = 0
 
         for (let i=0; i<iterations; i++) {
-            sum+=periodContribution
-            investmentsTotal+=periodContribution
-
             const incomeGross = sum * periodRate
             const tax = incomeGross*periodTaxRate
             const incomeNet = incomeGross - tax
@@ -63,6 +63,9 @@ function InvForm({onSubmit}) {
 
             sum+=incomeNet
             taxTotal+=tax
+
+            sum+=periodContribution
+            investmentsTotal+=periodContribution
 
             resultsList.push(sum)
         }

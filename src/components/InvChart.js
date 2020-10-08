@@ -5,8 +5,6 @@ import Paper from '@material-ui/core/Paper'
 import {Box, Typography} from '@material-ui/core'
 
 function InvChart({data}) {
-    console.log('--- data', data)
-
     const tooltipFormatter = useCallback((value, name, props) => ([`${Math.round(value*100)/100}`, `Sum: `] ), [])
     const tooltipLabelFormatter = useCallback((value) => (`Period ${value}`), [])
 
