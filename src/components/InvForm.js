@@ -133,7 +133,9 @@ function InvForm({onSubmit}) {
     )
 }
 
-InvForm.propTypes = {}
+InvForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+}
 InvForm.defaultProps = {}
 
 export default InvForm

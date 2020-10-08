@@ -1,4 +1,5 @@
 import React, {useCallback} from 'react'
+import PropTypes from 'prop-types'
 import {BarChart, Bar, XAxis, YAxis, Tooltip} from 'recharts'
 import {Box, Typography} from '@material-ui/core'
 
@@ -50,7 +51,9 @@ function InvChart({data}) {
     )
 }
 
-InvChart.propTypes = {}
+InvChart.propTypes = {
+    data: PropTypes.object,
+}
 InvChart.defaultProps = {}
 
 export default InvChart
